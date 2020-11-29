@@ -1,22 +1,12 @@
 import React, { Component } from 'react'; 
 import styled from 'styled-components';
-import Person from './Person/Person';
-import './App.css';
+import Persons from '../components/Persons/Persons';
+import classes from './App.module.css';  // CSS  Modules
+
+import Cockpit from '../components/Cockpit/Cockpit'
 
 
-const StyledButton  = styled.button`
-      background-color:${props => props.alt ? 'red' : 'green'};
-      color:white;
-      font:inherit;
-      border: 1px solid blue;
-      cursor:pointer;
-      padding: 8px;
-      cursor:pointer;  
-      &:hover {
-        background-color: ${props => props.alt ? '#f88379' : 'lightgreen'};
-        color: black;
-      }   
-`
+
 
 class App extends Component {
 
@@ -69,47 +59,33 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      
-    }
-
     let persons = null;
+    
 
     if(this.state.showPersons){
       persons = (
-        <div>
-
-        {this.state.persons.map((person, index)=> {
-            return <Person 
-              name={person.name} 
-              clicked = {()=>this.deletePersonHandler(index)}
-              age={person.age}
-              key = {person.id}
-              changed = {(event)=>this.nameChangedHandler(event, person.id)} 
-            />
-        })}
-          
-          
-        </div>
+        
+          <Persons 
+          persons = {this.state.persons} 
+          clicked={this.deletePersonHandler} 
+          changed={this.nameChangedHandler} 
+          toggle = {()=>{this.togglePersonHandler()}}
+          />
+        
       ); 
-
+        
     }
 
-    let classes = [];
-    if(this.state.persons.length <= 2) {
-      classes.push('red');  // classes = ['red']
-    }
-    if(this.state.persons.length <= 1){
-      classes.push('bold'); // classes = ['red', 'bold']
-    }
 
 
     return (
-      <div className="App">
-        <h1>Hi, I'm A React App</h1>
-        <p className = {classes.join(' ')}>This is really working</p>
-        <StyledButton alt={this.state.showPersons} style={style} onClick = {this.togglePersonHandler}>Toggle Button</StyledButton>
-        {persons}
+      <div className={classes.App}>
+      <Cockpit 
+      showPersons = {this.state.showPersons} 
+      persons = {persons}
+        toggle = {()=>this.togglePersonHandler()}
+      />
+       {persons}
       </div>
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Hi, I\'m a react app!') );

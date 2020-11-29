@@ -3,8 +3,6 @@ import React from 'react';
 import './Person.css'
 import styled from 'styled-components'
 
-
-
 const StyledDiv = styled.div`
         width: 60%;
         margin: 20px auto;
@@ -16,8 +14,8 @@ const StyledDiv = styled.div`
         @media (min-width:500px) {
                 width: 450px;           
         }
-
 `
+
 
 const person = (props) => {
 
@@ -30,7 +28,7 @@ const person = (props) => {
     return (
         // <div  className="Person" style = {style}>
         <StyledDiv>
-            <p onClick = {props.clicked}>I'm {props.name}, {props.age} years old</p>
+            <p onClick = {props.click}>I'm {props.name}, {props.age} years old</p>
             <input type="text" onChange={props.changed} value={props.name}></input>
         </StyledDiv>
     );
