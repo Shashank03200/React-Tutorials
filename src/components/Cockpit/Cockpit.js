@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import classes from './Cockpit.module.css'
 
 
 const Cockpit = (props) => {
 
+    useEffect(()=>{
+      console.log('[Cockpit.js] useEffect')
+      setTimeout(()=>{
+        alert('Data saved to cloud');
+      },1000);
+    }, [props.persons] );
+    
+
     const assignedClasses = [];
     let btnClass = [classes.Button];
-    console.log(btnClass);
-    
+   
     if(props.showPersons) {
         btnClass.push(classes.Red);
         console.log(btnClass);
@@ -27,7 +34,7 @@ const Cockpit = (props) => {
     return (
     <div className = {classes.Cockpit}>
         
-        <h1>Hi, I'm A React App</h1>
+        <h1>{props.title}</h1>
          
         <p 
         className = {assignedClasses.join(' ')}>This is really working</p>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect } from 'react';
 
 import './Person.css'
 import styled from 'styled-components'
@@ -17,13 +17,9 @@ const StyledDiv = styled.div`
 `
 
 
-const person = (props) => {
+const Person = (props) => {
 
-    // const style = {
-    //     '@media (min-width: 500px)': {
-    //         width:'450px'
-    //     }
-    // }
+        // console.log('[Person.js] rendering...');
 
     return (
         // <div  className="Person" style = {style}>
@@ -32,6 +28,7 @@ const person = (props) => {
             <input type="text" onChange={props.changed} value={props.name}></input>
         </StyledDiv>
     );
+    
 }
 
-export default person;
+export default Person;

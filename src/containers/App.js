@@ -10,6 +10,14 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
+  // Not req in React using ES6
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    // Can also intialize the state;
+  }
+
+
   state = {
     persons: [
       {id: 'asfa1', name: 'Max', age: 28},
@@ -18,6 +26,19 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount')
+  // }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
   }
 
   
@@ -59,6 +80,7 @@ class App extends Component {
 
   render() {
 
+    console.log('[App.js] render');
     let persons = null;
     
 
@@ -79,12 +101,20 @@ class App extends Component {
 
 
     return (
+      
       <div className={classes.App}>
-      <Cockpit 
+{/* 
+      <button 
+      onClick={() => this.setState({showCockpit:false})}>Remove Cockpit</button> */}
+      
+      
+        <Cockpit 
+      title = {this.props.appTitle}
       showPersons = {this.state.showPersons} 
       persons = {persons}
         toggle = {()=>this.togglePersonHandler()}
-      />
+      /> 
+      
        {persons}
       </div>
     );
